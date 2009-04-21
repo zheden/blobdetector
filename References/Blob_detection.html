@@ -1,0 +1,516 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+
+	
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="generator" content="MediaWiki 1.14alpha">
+		<meta name="keywords" content="Blob detection,Blob detection,Affine shape adaptation,Blob extraction,Canny edge detector,Computer vision,Corner detection,Difference of Gaussians,Diffusion equation,Digital object identifier,Edge detection">
+		<link rel="alternate" type="application/x-wiki" title="Edit this page" href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;action=edit">
+		<link rel="shortcut icon" href="http://en.wikipedia.org/favicon.ico">
+		<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png">
+		<link rel="search" type="application/opensearchdescription+xml" href="http://en.wikipedia.org/w/opensearch_desc.php" title="Wikipedia (en)">
+		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html">
+		<link rel="alternate" type="application/rss+xml" title="Wikipedia RSS Feed" href="http://en.wikipedia.org/w/index.php?title=Special:RecentChanges&amp;feed=rss">
+		<link rel="alternate" type="application/atom+xml" title="Wikipedia Atom Feed" href="http://en.wikipedia.org/w/index.php?title=Special:RecentChanges&amp;feed=atom">
+		<title>Blob detection - Wikipedia, the free encyclopedia</title>
+		<link rel="stylesheet" href="Blob_detection_files/shared.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="Blob_detection_files/commonPrint.css" type="text/css" media="print">
+		<link rel="stylesheet" href="Blob_detection_files/main.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="Blob_detection_files/main_002.css" type="text/css" media="handheld">
+		<!--[if lt IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE50Fixes.css?179" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 5.5000]><link rel="stylesheet" href="/skins-1.5/monobook/IE55Fixes.css?179" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 6]><link rel="stylesheet" href="/skins-1.5/monobook/IE60Fixes.css?179" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" href="/skins-1.5/monobook/IE70Fixes.css?179" type="text/css" media="screen" /><![endif]-->
+		<link rel="stylesheet" href="Blob_detection_files/index_003.css" type="text/css">
+		<link rel="stylesheet" href="Blob_detection_files/index_005.css" type="text/css" media="print">
+		<link rel="stylesheet" href="Blob_detection_files/index_002.css" type="text/css" media="handheld">
+		<link rel="stylesheet" href="Blob_detection_files/index_004.css" type="text/css">
+		<link rel="stylesheet" href="Blob_detection_files/index.css" type="text/css">
+		<!--[if lt IE 7]><script type="text/javascript" src="/skins-1.5/common/IEFixes.js?179"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+		
+		<script type="text/javascript">/*<![CDATA[*/
+		var skin = "monobook";
+		var stylepath = "/skins-1.5";
+		var wgArticlePath = "/wiki/$1";
+		var wgScriptPath = "/w";
+		var wgScript = "/w/index.php";
+		var wgVariantArticlePath = false;
+		var wgActionPaths = {};
+		var wgServer = "http://en.wikipedia.org";
+		var wgCanonicalNamespace = "";
+		var wgCanonicalSpecialPageName = false;
+		var wgNamespaceNumber = 0;
+		var wgPageName = "Blob_detection";
+		var wgTitle = "Blob detection";
+		var wgAction = "view";
+		var wgArticleId = "6840205";
+		var wgIsArticle = true;
+		var wgUserName = null;
+		var wgUserGroups = null;
+		var wgUserLanguage = "en";
+		var wgContentLanguage = "en";
+		var wgBreakFrames = false;
+		var wgCurRevisionId = "229101892";
+		var wgVersion = "1.14alpha";
+		var wgEnableAPI = true;
+		var wgEnableWriteAPI = true;
+		var wgMWSuggestTemplate = "http://en.wikipedia.org/w/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}";
+		var wgDBname = "enwiki";
+		var wgSearchNamespaces = [0];
+		var wgMWSuggestMessages = ["with suggestions", "no suggestions"];
+		var wgRestrictionEdit = [];
+		var wgRestrictionMove = [];
+		/*]]>*/</script>
+                
+		<script type="text/javascript" src="Blob_detection_files/wikibits.js"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="Blob_detection_files/ajax.js"></script>
+		<script type="text/javascript" src="Blob_detection_files/mwsuggest.js"></script>
+		<script type="text/javascript" src="Blob_detection_files/index.php"><!-- site js --></script><script type="text/javascript" src="Blob_detection_files/index_002.php"></script>
+	</head><body class="mediawiki ltr ns-0 ns-subject page-Blob_detection skin-monobook">
+	<div id="globalWrapper"><div style="position: absolute; z-index: 40; left: 155px; top: 1px; clear: both; float: left; font-size: 90%; font-style: italic; white-space: nowrap;" id="anon-banner">Have questions? <a href="http://en.wikipedia.org/wiki/Wikipedia:Questions" title="Wikipedia:Questions">Find out how to ask questions and get answers.</a></div>
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+		<div id="siteNotice"><script type="text/javascript" language="JavaScript">
+<!--
+document.writeln("\x3cp\x3e\x3c/p\x3e\n");
+-->
+</script><p></p>
+
+</div>		<h1 class="firstHeading">Blob detection</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">From Wikipedia, the free encyclopedia</h3>
+			<div id="contentSub"></div>
+									<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>			<!-- start content -->
+			<table class="infobox" style="text-align: left; font-size: 88%; line-height: 1.5em; width: 20em;" cellspacing="5">
+<tbody><tr>
+<td colspan="2" class="" style="text-align: center; font-size: 125%; font-weight: bold;"><a href="http://en.wikipedia.org/wiki/Feature_detection_%28computer_vision%29" title="Feature detection (computer vision)">Feature detection</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Image:Corner.png" class="image" title="Corner.png"><img alt="" src="Blob_detection_files/200px-Corner.png" border="0" width="200" height="174"></a><br>
+<span style="">Output of a typical corner detection algorithm</span></td>
+</tr>
+<tr>
+<th colspan="2" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Edge_detection" title="Edge detection">Edge detection</a></th>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Canny_edge_detector" title="Canny edge detector">Canny</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Canny_edge_detector#Conclusion" title="Canny edge detector">Canny-Deriche</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Edge_detection#Differential_edge_detection" title="Edge detection">Differential</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Sobel_operator" title="Sobel operator">Sobel</a></td>
+</tr>
+<tr>
+<th colspan="2" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Interest_point_detection" title="Interest point detection">Interest point detection</a></th>
+</tr>
+<tr>
+<th colspan="2" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Corner_detection" title="Corner detection">Corner detection</a></th>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Corner_detection#The_Harris_.26_Stephens_.2F_Plessey_corner_detection_algorithm" title="Corner detection">Harris operator</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Corner_detection#The_Shi_and_Tomasi_corner_detection_algorithm" title="Corner detection">Shi and Tomasi</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Corner_detection#The_level_curve_curvature_approach" title="Corner detection">Level curve curvature</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Corner_detection#The_SUSAN_corner_detector" title="Corner detection">SUSAN</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Corner_detection#The_FAST_feature_detector" title="Corner detection">FAST</a></td>
+</tr>
+<tr>
+<th colspan="2" style="text-align: center;"><strong class="selflink">Blob detection</strong></th>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Blob_detection#The_Laplacian_of_Gaussian" title="Blob detection">Laplacian of Gaussian (LoG)</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Difference_of_Gaussians" title="Difference of Gaussians">Difference of Gaussians (DoG)</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Blob_detection#The_determinant_of_the_Hessian" title="Blob detection">Determinant of Hessian (DoH)</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Maximally_stable_extremal_regions" title="Maximally stable extremal regions">Maximally stable extremal regions</a></td>
+</tr>
+<tr>
+<th colspan="2" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Ridge_detection" title="Ridge detection">Ridge detection</a></th>
+</tr>
+<tr>
+<th colspan="2" style="text-align: center;">Affine invariant feature detection</th>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Affine_shape_adaptation" title="Affine shape adaptation">Affine shape adaptation</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Harris_affine_region_detector" title="Harris affine region detector">Harris affine</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Hessian_Affine_region_detector" title="Hessian Affine region detector">Hessian affine</a></td>
+</tr>
+<tr>
+<th colspan="2" style="text-align: center;">Feature description</th>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Scale-invariant_feature_transform" title="Scale-invariant feature transform">SIFT</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/SURF" title="SURF">SURF</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/GLOH" title="GLOH">GLOH</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/LESH" title="LESH">LESH</a></td>
+</tr>
+<tr>
+<th colspan="2" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Scale-space" title="Scale-space" class="mw-redirect">Scale-space</a></th>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Scale-space_axioms" title="Scale-space axioms">Scale-space axioms</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Scale-space_implementation" title="Scale-space implementation" class="mw-redirect">Implementation details</a></td>
+</tr>
+<tr>
+<td colspan="2" class="" style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Pyramid_%28image_processing%29" title="Pyramid (image processing)">Pyramids</a></td>
+</tr>
+<tr>
+<td style="text-align: right;" colspan="2">
+<div class="noprint plainlinksneverexpand" style="padding: 0pt; background-color: transparent; white-space: nowrap; font-weight: normal; font-size: xx-small;">This box:&nbsp;<a href="http://en.wikipedia.org/wiki/Template:FeatureDetectionCompVisNavbox" title="Template:FeatureDetectionCompVisNavbox"><span title="View this template" style="">view</span></a>&nbsp;<span style="font-size: 80%;">•</span>&nbsp;<a href="http://en.wikipedia.org/w/index.php?title=Template_talk:FeatureDetectionCompVisNavbox&amp;action=edit&amp;redlink=1" class="new" title="Template talk:FeatureDetectionCompVisNavbox (page does not exist)"><span style="color: rgb(0, 43, 184);" title="Discussion about this template">talk</span></a>&nbsp;<span style="font-size: 80%;">•</span>&nbsp;<a href="http://en.wikipedia.org/w/index.php?title=Template:FeatureDetectionCompVisNavbox&amp;action=edit" class="external text" title="http://en.wikipedia.org/w/index.php?title=Template:FeatureDetectionCompVisNavbox&amp;action=edit" rel="nofollow"><span style="color: rgb(0, 43, 184);" title="You can edit this template. Please use the preview button before saving.">edit</span></a></div>
+</td>
+</tr>
+</tbody></table>
+<p>In the area of <a href="http://en.wikipedia.org/wiki/Computer_vision" title="Computer vision">computer vision</a>, '<b>blob detection'</b>
+refers to visual modules that are aimed at detecting points and/or
+regions in the image that are either brighter or darker than the
+surrounding. There are two main classes of blob detectors (i) <i>differential methods</i> based on derivative expressions and (ii) <i>methods based on local extrema</i> in the intensity landscape. With the more recent terminology used in the field, these operators can also be referred to as <i>interest point operators</i>, or alternatively interest region operators (see also <a href="http://en.wikipedia.org/wiki/Interest_point_detection" title="Interest point detection">interest point detection</a> and <a href="http://en.wikipedia.org/wiki/Corner_detection" title="Corner detection">corner detection</a>).</p>
+<p>There are several motivations for studying and developing blob
+detectors. One main reason is to provide complementary information
+about regions, which is not obtained from <a href="http://en.wikipedia.org/wiki/Edge_detection" title="Edge detection">edge detectors</a> or <a href="http://en.wikipedia.org/wiki/Corner_detection" title="Corner detection">corner detectors</a>.
+In early work in the area, blob detection was used to obtain regions of
+interest for further processing. These regions could signal the
+presence of objects or parts of objects in the image domain with
+application to <a href="http://en.wikipedia.org/wiki/Object_recognition" title="Object recognition">object recognition</a> and/or object <a href="http://en.wikipedia.org/wiki/Video_tracking" title="Video tracking">tracking</a>. In other domains, such as histogram analysis, blob descriptors can also be used for peak detection with application to <a href="http://en.wikipedia.org/wiki/Segmentation_%28image_processing%29" title="Segmentation (image processing)">segmentation</a>. Another common use of blob descriptors is as main primitives for <a href="http://en.wikipedia.org/wiki/Texture" title="Texture">texture</a> analysis and texture recognition. In more recent work, blob descriptors have found increasingly popular use as <a href="http://en.wikipedia.org/wiki/Interest_point_detection" title="Interest point detection">interest points</a> for wide baseline <a href="http://en.wikipedia.org/wiki/Image_registration" title="Image registration">stereo matching</a>
+and to signal the presence of informative image features for
+appearance-based object recognition based on local image statistics.
+There is also the related notion of <a href="http://en.wikipedia.org/wiki/Ridge_detection" title="Ridge detection">ridge detection</a> to signal the presence of elongated objects.</p>
+<table id="toc" class="toc" summary="Contents">
+<tbody><tr>
+<td>
+<div id="toctitle">
+<h2>Contents</h2>
+ <span class="toctoggle">[<a href="javascript:toggleToc()" class="internal" id="togglelink">hide</a>]</span></div>
+<ul>
+<li class="toclevel-1"><a href="#The_Laplacian_of_Gaussian"><span class="tocnumber">1</span> <span class="toctext">The Laplacian of Gaussian</span></a></li>
+<li class="toclevel-1"><a href="#The_difference_of_Gaussians_approach"><span class="tocnumber">2</span> <span class="toctext">The difference of Gaussians approach</span></a></li>
+<li class="toclevel-1"><a href="#The_determinant_of_the_Hessian"><span class="tocnumber">3</span> <span class="toctext">The determinant of the Hessian</span></a></li>
+<li class="toclevel-1"><a href="#The_hybrid_Laplacian_and_determinant_of_the_Hessian_operator_.28Hessian-Laplace.29"><span class="tocnumber">4</span> <span class="toctext">The hybrid Laplacian and determinant of the Hessian operator (Hessian-Laplace)</span></a></li>
+<li class="toclevel-1"><a href="#Affine-adapted_differential_blob_detectors"><span class="tocnumber">5</span> <span class="toctext">Affine-adapted differential blob detectors</span></a></li>
+<li class="toclevel-1"><a href="#Grey-level_blobs.2C_grey-level_blob_trees_and_scale-space_blobs"><span class="tocnumber">6</span> <span class="toctext">Grey-level blobs, grey-level blob trees and scale-space blobs</span></a></li>
+<li class="toclevel-1"><a href="#Maximally_stable_extremum_regions_.28MSER.29"><span class="tocnumber">7</span> <span class="toctext">Maximally stable extremum regions (MSER)</span></a></li>
+<li class="toclevel-1"><a href="#See_also"><span class="tocnumber">8</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1"><a href="#References"><span class="tocnumber">9</span> <span class="toctext">References</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody></table>
+<script type="text/javascript">
+//<![CDATA[
+ if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } 
+//]]>
+</script>
+<p><a name="The_Laplacian_of_Gaussian" id="The_Laplacian_of_Gaussian"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;action=edit&amp;section=1" title="Edit section: The Laplacian of Gaussian">edit</a>]</span> <span class="mw-headline">The Laplacian of Gaussian</span></h2>
+<p>One of the first and also most common blob detectors is based on the <a href="http://en.wikipedia.org/wiki/Laplacian" title="Laplacian" class="mw-redirect">Laplacian</a> of the Gaussian (LoG). Given an input image <span class="texhtml"><i>f</i>(<i>x</i>,<i>y</i>)</span>, this image is convolved by a Gaussian kernel</p>
+<dl>
+<dd><img class="tex" alt="g(x, y, t) = \frac {1}{2{\pi t}}e^{-(x^2+y^2)/(2t)}" src="Blob_detection_files/21e27ac6f6efb11ee2785146d144a625.png"></dd>
+</dl>
+<p>at a certain scale <span class="texhtml"><i>t</i></span> to give a <a href="http://en.wikipedia.org/wiki/Scale-space" title="Scale-space" class="mw-redirect">scale-space</a> representation <img class="tex" alt="L(x, y, t)\ = g(x, y, t) * f(x, y)" src="Blob_detection_files/91d03782694c1acea97ab86c42bab6b5.png">. Then, the <a href="http://en.wikipedia.org/wiki/Laplacian" title="Laplacian" class="mw-redirect">Laplacian</a> operator</p>
+<dl>
+<dd><img class="tex" alt="\nabla^2 L = L_{xx} + L_{yy}" src="Blob_detection_files/2f277d5ef874bd82513988dfca94b52c.png"></dd>
+</dl>
+<p>is computed, which usually results in strong positive responses for dark blobs of extent <img class="tex" alt="\sqrt{t}" src="Blob_detection_files/190dbe2fc9d5fe5290d0960f07e026fc.png">
+and strong negative responses for bright blobs of similar size. A main
+problem when applying this operator at a single scale, however, is that
+the operator response is strongly dependent on the relationship between
+the size of the blob structures in the image domain and the size of the
+Gaussian kernel used for pre-smoothing. In order to automatically
+capture blobs of different (unknown) size in the image domain, a
+multi-scale approach is therefore necessary.</p>
+<p>A straightforward way to obtain a <i>multi-scale blob detector with automatic scale selection</i> is to consider the <i>scale-normalized Laplacian operator</i></p>
+<dl>
+<dd><img class="tex" alt="\nabla^2_{norm} L(x, y; t) = t(L_{xx} + L_{yy})" src="Blob_detection_files/e8ecc0610adb559e216a6d82dec9d274.png"></dd>
+</dl>
+<p>and to detect <i>scale-space maxima/minima</i>, that are points that are <i>simultaneously local maxima/minima of <img class="tex" alt="\nabla^2_{norm} L" src="Blob_detection_files/d433c33439f3f9a82a6292dd4e219dbc.png"> with respect to both space and scale</i> (Lindeberg 1998). Thus, given a discrete two-dimensional input image <span class="texhtml"><i>f</i>(<i>x</i>,<i>y</i>)</span> a three-dimensional discrete scale-space volume <span class="texhtml"><i>L</i>(<i>x</i>,<i>y</i>,<i>t</i>)</span>
+is computed and a point is regarded as a bright (dark) blob if the
+value at this point is greater (smaller) than the value in all its 26
+neighbours. Thus, simultaneous selection of interest points <img class="tex" alt="(\hat{x}, \hat{y})" src="Blob_detection_files/935d47cefe061544d26574396740abac.png"> and scales <img class="tex" alt="\hat{t}" src="Blob_detection_files/1003afc8969f92c0140a6a4363ed58dd.png"> is performed according to</p>
+<dl>
+<dd><img class="tex" alt="(\hat{x}, \hat{y}; \hat{t}) = \operatorname{argmaxminlocal}_{(x, y; t)}(\nabla^2_{norm} L(x, y; t))" src="Blob_detection_files/e67a218449f898148eb85bddab555b5e.png">.</dd>
+</dl>
+<p>Note that this notion of blob provides a concise and mathematically
+precise operational definition of the notion of "blob", which directly
+leads to an efficient and robust algorithm for blob detection. Some
+basic properties of blobs defined from scale-space maxima of the
+normalized Laplacian operator are that the responses are covariant with
+translations, rotations and rescalings in the image domain. Thus, if a
+scale-space maximum is assumed at a point <span class="texhtml">(<i>x</i><sub>0</sub>,<i>y</i><sub>0</sub>;<i>t</i><sub>0</sub>)</span> then under a rescaling of the image by a scale factor <span class="texhtml"><i>s</i></span>, there will be a scale-space maximum at <span class="texhtml">(<i>s</i><i>x</i><sub>0</sub>,<i>s</i><i>y</i><sub>0</sub>;<i>s</i><sup>2</sup><i>t</i><sub>0</sub>)</span>
+in the rescaled image (Lindeberg 1998). This in practice highly useful
+property implies that besides the specific topic of Laplacian blob
+detection, <i>local maxima/minima of the scale-normalized Laplacian are also used for scale selection in other contexts</i>, such as in <a href="http://en.wikipedia.org/wiki/Corner_detection" title="Corner detection">corner detection</a>, scale-adaptive feature tracking (Bretzner and Lindeberg 1998), in the <a href="http://en.wikipedia.org/wiki/Scale-invariant_feature_transform" title="Scale-invariant feature transform">scale-invariant feature transform</a> (Lowe 2004) as well as other image descriptors for image matching and <a href="http://en.wikipedia.org/wiki/Object_recognition" title="Object recognition">object recognition</a>.</p>
+<p><a name="The_difference_of_Gaussians_approach" id="The_difference_of_Gaussians_approach"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;action=edit&amp;section=2" title="Edit section: The difference of Gaussians approach">edit</a>]</span> <span class="mw-headline">The difference of Gaussians approach</span></h2>
+<p>From the fact that the <a href="http://en.wikipedia.org/wiki/Scale-space" title="Scale-space" class="mw-redirect">scale-space</a> representation <span class="texhtml"><i>L</i>(<i>x</i>,<i>y</i>,<i>t</i>)</span> satisfies the <a href="http://en.wikipedia.org/wiki/Diffusion_equation" title="Diffusion equation">diffusion equation</a></p>
+<dl>
+<dd><img class="tex" alt="\partial_t L = \frac{1}{2} \nabla^2 L" src="Blob_detection_files/b8cc6dc15d600ea7cf206fbd631d55c1.png"></dd>
+</dl>
+<p>it follows that the Laplacian of the Gaussian operator <img class="tex" alt="\nabla^2 L(x, y, t)" src="Blob_detection_files/006175e87cc3534f84e1b0ba04db0b0b.png"> can also be computed as the limit case of the difference between two Gaussian smoothed images (scale-space representations)</p>
+<dl>
+<dd><img class="tex" alt="\nabla^2 L(x, y; t) = \frac{1}{2 \Delta t} \left( L(x, y; t+\Delta t) - L(x, y; t-\Delta t) \right)" src="Blob_detection_files/9b641b5eca91df8f6d19fe431b156010.png">.</dd>
+</dl>
+<p>In the computer vision literature, this approach is referred to as the <a href="http://en.wikipedia.org/wiki/Difference_of_Gaussians" title="Difference of Gaussians">Difference of Gaussians</a> (DoG) approach. Besides minor technicalities, however, this operator is in essence similar to the <a href="http://en.wikipedia.org/wiki/Laplacian" title="Laplacian" class="mw-redirect">Laplacian</a>
+and can be seen as an approximation of the Laplacian operator. In a
+similar fashion as for the Laplacian blob detector, blobs can be
+detected from scale-space extrema of differences of Gaussians.</p>
+<p><a name="The_determinant_of_the_Hessian" id="The_determinant_of_the_Hessian"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;action=edit&amp;section=3" title="Edit section: The determinant of the Hessian">edit</a>]</span> <span class="mw-headline">The determinant of the Hessian</span></h2>
+<p>By considering the scale-normalized determinant of the Hessian, also referred to as the <a href="http://en.wikipedia.org/wiki/Monge%E2%80%93Amp%C3%A8re_equation" title="Monge–Ampère equation">Monge–Ampère operator</a>,</p>
+<dl>
+<dd><img class="tex" alt="\operatorname{det} H L(x, y; t) = t^2 (L_{xx} L_{yy} - L_{xy}^2)" src="Blob_detection_files/4d51b2704b3e48664aafa74c84fa5270.png"></dd>
+</dl>
+<p>where <span class="texhtml"><i>H</i><i>L</i></span> denotes the <a href="http://en.wikipedia.org/wiki/Hessian_matrix" title="Hessian matrix">Hessian matrix</a> of <span class="texhtml"><i>L</i></span>
+and then detecting scale-space maxima/minima of this operator one
+obtains another straightforward differential blob detector with
+automatic scale selection which also responds to saddles (Lindeberg
+1998)</p>
+<dl>
+<dd><img class="tex" alt="(\hat{x}, \hat{y}; \hat{t}) = \operatorname{argmaxminlocal}_{(x, y; t)}(\operatorname{det} H L(x, y; t))" src="Blob_detection_files/a4446a28ef670b17c127ca4b11911717.png">.</dd>
+</dl>
+<p>The blob points <img class="tex" alt="(\hat{x}, \hat{y})" src="Blob_detection_files/935d47cefe061544d26574396740abac.png"> and scales <img class="tex" alt="\hat{t}" src="Blob_detection_files/1003afc8969f92c0140a6a4363ed58dd.png">
+are also defined from an operational differential geometric definitions
+that leads to blob descriptors that are covariant with translations,
+rotations and rescalings in the image domain. In terms of scale
+selection, blobs defined from scale-space extrema of the determinant of
+the Hessian (DoH) also have slightly better scale selection properties
+under non-Euclidean affine transformations than the more commonly used
+Laplacian operator (Lindeberg 1998). In simplified form, the
+determinant of the Hessian computed from <a href="http://en.wikipedia.org/wiki/Haar_wavelet" title="Haar wavelet">Haar wavelets</a> is used as the basic interest point operator in the <a href="http://en.wikipedia.org/wiki/SURF" title="SURF">SURF</a> descriptor (Bay et al 2006) for image matching and object recognition.</p>
+<p><a name="The_hybrid_Laplacian_and_determinant_of_the_Hessian_operator_.28Hessian-Laplace.29" id="The_hybrid_Laplacian_and_determinant_of_the_Hessian_operator_.28Hessian-Laplace.29"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;action=edit&amp;section=4" title="Edit section: The hybrid Laplacian and determinant of the Hessian operator (Hessian-Laplace)">edit</a>]</span> <span class="mw-headline">The hybrid Laplacian and determinant of the Hessian operator (Hessian-Laplace)</span></h2>
+<p>A hybrid operator between the Laplacian and the determinant of the
+Hessian blob detectors has also been proposed, where spatial selection
+is done by the determinant of the Hessian and scale selection is
+performed with the scale-normalized Laplacian (Mikolajczyk and Schmid
+2004)</p>
+<dl>
+<dd><img class="tex" alt="(\hat{x}, \hat{y}) = \operatorname{argmaxminlocal}_{(x, y)}(\operatorname{det} H L(x, y; t))" src="Blob_detection_files/c45e380249f21b0581df114c17165e63.png">,</dd>
+<dd><img class="tex" alt="\hat{t} = \operatorname{argmaxminlocal}_{t}(\nabla^2_{norm} L(\hat{x}, \hat{y}; t))" src="Blob_detection_files/bdda3dc940656afb5307d4ef622e8634.png">. This operator has been used for image matching, object recognition as well as texture analysis.</dd>
+</dl>
+<p><a name="Affine-adapted_differential_blob_detectors" id="Affine-adapted_differential_blob_detectors"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;action=edit&amp;section=5" title="Edit section: Affine-adapted differential blob detectors">edit</a>]</span> <span class="mw-headline">Affine-adapted differential blob detectors</span></h2>
+<p>The blob descriptors obtained from these blob detectors with
+automatic scale selection are invariant to translations, rotations and
+uniform rescalings in the spatial domain. The images that constitute
+the input to a computer vision system are, however, also subject to
+perspective distortions. To obtain blob descriptors that are more
+robust to perspective transformations, a natural approach is to devise
+a blob detector that is <i>invariant to affine transformations</i>. In practice, affine invariant interest points can be obtained by applying <a href="http://en.wikipedia.org/wiki/Affine_shape_adaptation" title="Affine shape adaptation">affine shape adaptation</a>
+to a blob descriptor, where the shape of the smoothing kernel is
+iteratively warped to match the local image structure around the blob,
+or equivalently a local image patch is iteratively warped while the
+shape of the smoothing kernel remains rotationally symmetric (Lindeberg
+and Garding 1997; Baumberg 2000; Mikolajczyk and Schmid 2004). In this
+way, we can define affine-adapted versions of the Laplacian/Difference
+of Gaussian operator, the determinant of the Hessian and the
+Hessian-Laplace operator (see also <a href="http://en.wikipedia.org/wiki/Harris-Affine" title="Harris-Affine" class="mw-redirect">Harris-Affine</a> and <a href="http://en.wikipedia.org/wiki/Hessian-Affine" title="Hessian-Affine" class="mw-redirect">Hessian-Affine</a>).</p>
+<p><a name="Grey-level_blobs.2C_grey-level_blob_trees_and_scale-space_blobs" id="Grey-level_blobs.2C_grey-level_blob_trees_and_scale-space_blobs"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;action=edit&amp;section=6" title="Edit section: Grey-level blobs, grey-level blob trees and scale-space blobs">edit</a>]</span> <span class="mw-headline">Grey-level blobs, grey-level blob trees and scale-space blobs</span></h2>
+<p>A natural approach to detect blobs is to associate a bright (dark)
+blob with each local maximum (minimum) in the intensity landscape. A
+main problem with such an approach, however, is that local extrema are
+very sensitive to noise. To address this problem, Lindeberg (1993)
+studied the problem of detecting local maxima with extent at multiple
+scales in <a href="http://en.wikipedia.org/wiki/Scale-space" title="Scale-space" class="mw-redirect">scale-space</a>.
+A region with spatial extent defined from a watershed analogy was
+associated with each local maximum, as well a local contrast defined
+from a so-called delimiting saddle point. A local extremum with extent
+defined in this way was referred to as a <i>grey-level blob</i>. Moreover, by proceeding with the watershed analogy beyond the delimiting saddle point, a <i>grey-level blob tree</i>
+was defined to capture the nested topological structure of level sets
+in the intensity landscape, in a way that is invariant to affine
+deformations in the image domain and monotone intensity
+transformations. By studying how these structures evolve with
+increasing scales, the notion of <i>scale-space blobs</i> was
+introduced. Beyond local contrast and extent, these scale-space blobs
+also measured how stable image structures are in scale-space, by
+measuring their <i>scale-space lifetime</i>.</p>
+<p>It was proposed that regions of interest and scale descriptors
+obtained in this way, with associated scale levels defined from the
+scales at which normalized measures of blob strength assumed their
+maxima over scales could be used for guiding other early visual
+processing. An early prototype of simplified vision systems was
+developed where such regions of interest and scale descriptors were
+used for directing the focus-of-attention of an active vision system.
+While the specific technique that was used in these prototypes can be
+substantially improved with the current knowledge in computer vision,
+the overall general approach is still valid, for example in the way
+that that local extrema over scales of the scale-normalized Laplacian
+operator are nowadays used for providing scale information to other
+visual processes.</p>
+<p><a name="Maximally_stable_extremum_regions_.28MSER.29" id="Maximally_stable_extremum_regions_.28MSER.29"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;action=edit&amp;section=7" title="Edit section: Maximally stable extremum regions (MSER)">edit</a>]</span> <span class="mw-headline">Maximally stable extremum regions (MSER)</span></h2>
+<dl>
+<dd>
+<div class="noprint relarticle mainarticle"><i>Main article: <a href="http://en.wikipedia.org/wiki/Maximally_stable_extremal_regions" title="Maximally stable extremal regions">Maximally stable extremal regions</a></i></div>
+</dd>
+</dl>
+<p>Matas et al (2002) were interested in defining image descriptors
+that are robust under perspective transformations. They studied level
+sets in the intensity landscape and measured how stable these were
+along the intensity dimension. Based on this idea, they defined a
+notion of <i>maximally stable extremum regions</i> and showed how these image descriptors can be used as image features for stereo matching.</p>
+<p>Interestingly, there are close relations between this notion and the
+abovementioned notion of grey-level blob tree. The maximally stable
+extremum regions can be seen as making a specific subset of the
+grey-level blob tree explicit for further processing.</p>
+<p><a name="See_also" id="See_also"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;action=edit&amp;section=8" title="Edit section: See also">edit</a>]</span> <span class="mw-headline">See also</span></h2>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Blob_extraction" title="Blob extraction">blob extraction</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Corner_detection" title="Corner detection">corner detection</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Affine_shape_adaptation" title="Affine shape adaptation">affine shape adaptation</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Scale-space" title="Scale-space" class="mw-redirect">scale-space</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Ridge_detection" title="Ridge detection">ridge detection</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Interest_point_detection" title="Interest point detection">interest point detection</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Feature_detection_%28computer_vision%29" title="Feature detection (computer vision)">feature detection (computer vision)</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Harris-Affine" title="Harris-Affine" class="mw-redirect">Harris-Affine</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Hessian-Affine" title="Hessian-Affine" class="mw-redirect">Hessian-Affine</a></li>
+</ul>
+<p><a name="References" id="References"></a></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;action=edit&amp;section=9" title="Edit section: References">edit</a>]</span> <span class="mw-headline">References</span></h2>
+<ul>
+<li><cite style="font-style: normal;">H. Bay, T. Tuytelaars and L. van Gool (2006). "<a href="http://www.vision.ee.ethz.ch/%7Esurf/papers.html" class="external text" title="http://www.vision.ee.ethz.ch/~surf/papers.html" rel="nofollow">SURF: Speeded Up Robust Features</a>". <i>Proceedings of the 9th European Conference on Computer Vision, Springer LNCS volume 3951, part 1</i>: 404--417.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=proceeding&amp;rft.btitle=Proceedings+of+the+9th+European+Conference+on+Computer+Vision%2C+Springer+LNCS+volume+3951%2C+part+1&amp;rft.atitle=SURF%3A+Speeded+Up+Robust+Features&amp;rft.au=H.+Bay%2C+T.+Tuytelaars+and+L.+van+Gool&amp;rft.date=2006&amp;rft.pages=404--417&amp;rft_id=http%3A%2F%2Fwww.vision.ee.ethz.ch%2F%7Esurf%2Fpapers.html"><span style="display: none;">&nbsp;</span></span></li>
+<li><cite style="font-style: normal;">L. Bretzner and T. Lindeberg (1998). "<a href="http://www.nada.kth.se/cvap/abstracts/cvap201.html" class="external text" title="http://www.nada.kth.se/cvap/abstracts/cvap201.html" rel="nofollow">Feature Tracking with Automatic Selection of Spatial Scales</a>" (abstract page). <i>Computer Vision and Image Understanding</i> <b>71</b>: pp 385--392. <a href="http://en.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<span class="neverexpand"><a href="http://dx.doi.org/10.1006%2Fcviu.1998.0650" class="external text" title="http://dx.doi.org/10.1006%2Fcviu.1998.0650" rel="nofollow">10.1006/cviu.1998.0650</a></span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Feature+Tracking+with+Automatic+Selection+of+Spatial+Scales&amp;rft.jtitle=Computer+Vision+and+Image+Understanding&amp;rft.date=1998&amp;rft.volume=71&amp;rft.au=L.+Bretzner+and+T.+Lindeberg&amp;rft.pages=pp+385--392&amp;rft_id=info:doi/10.1006%2Fcviu.1998.0650&amp;rft_id=http%3A%2F%2Fwww.nada.kth.se%2Fcvap%2Fabstracts%2Fcvap201.html"><span style="display: none;">&nbsp;</span></span></li>
+<li><cite style="font-style: normal;">T. Lindeberg (1993). "<a href="http://www.nada.kth.se/%7Etony/abstracts/Lin92-IJCV.html" class="external text" title="http://www.nada.kth.se/~tony/abstracts/Lin92-IJCV.html" rel="nofollow">Detecting Salient Blob-Like Image Structures and Their Scales with a Scale-Space Primal Sketch: A Method for Focus-of-Attention</a>" (abstract page). <i>International Journal of Computer Vision</i> <b>11</b> (3): pp 283--318. <a href="http://en.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<span class="neverexpand"><a href="http://dx.doi.org/10.1007%2FBF01469346" class="external text" title="http://dx.doi.org/10.1007%2FBF01469346" rel="nofollow">10.1007/BF01469346</a></span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Detecting+Salient+Blob-Like+Image+Structures+and+Their+Scales+with+a+Scale-Space+Primal+Sketch%3A+A+Method+for+Focus-of-Attention&amp;rft.jtitle=International+Journal+of+Computer+Vision&amp;rft.date=1993&amp;rft.volume=11&amp;rft.issue=3&amp;rft.au=T.+Lindeberg&amp;rft.pages=pp+283--318&amp;rft_id=info:doi/10.1007%2FBF01469346&amp;rft_id=http%3A%2F%2Fwww.nada.kth.se%2F%7Etony%2Fabstracts%2FLin92-IJCV.html"><span style="display: none;">&nbsp;</span></span></li>
+<li><cite style="font-style: normal;">T. Lindeberg (1998). "<a href="http://www.nada.kth.se/cvap/abstracts/cvap198.html" class="external text" title="http://www.nada.kth.se/cvap/abstracts/cvap198.html" rel="nofollow">Feature detection with automatic scale selection</a>" (abstract page). <i>International Journal of Computer Vision</i> <b>30</b> (2): pp 77--116.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Feature+detection+with+automatic+scale+selection&amp;rft.jtitle=International+Journal+of+Computer+Vision&amp;rft.date=1998&amp;rft.volume=30&amp;rft.issue=2&amp;rft.au=T.+Lindeberg&amp;rft.pages=pp+77--116&amp;rft_id=http%3A%2F%2Fwww.nada.kth.se%2Fcvap%2Fabstracts%2Fcvap198.html"><span style="display: none;">&nbsp;</span></span></li>
+<li><cite style="font-style: normal;">T. Lindeberg and J. Garding (1997). "<a href="http://www.nada.kth.se/%7Etony/abstracts/LG94-ECCV.html" class="external text" title="http://www.nada.kth.se/~tony/abstracts/LG94-ECCV.html" rel="nofollow">Shape-adapted smoothing in estimation of 3-{D} depth cues from affine distortions of local 2-{D} structure</a>". <i>International Journal of Computer Vision</i> <b>15</b>: pp 415--434.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Shape-adapted+smoothing+in+estimation+of+3-%7BD%7D+depth+cues+from+affine+distortions+of+local+2-%7BD%7D+structure&amp;rft.jtitle=International+Journal+of+Computer+Vision&amp;rft.date=1997&amp;rft.volume=15&amp;rft.au=T.+Lindeberg+and+J.+Garding&amp;rft.pages=pp+415--434&amp;rft_id=http%3A%2F%2Fwww.nada.kth.se%2F%7Etony%2Fabstracts%2FLG94-ECCV.html"><span style="display: none;">&nbsp;</span></span></li>
+<li><cite style="font-style: normal;">D. G. Lowe (2004). "<a href="http://citeseer.ist.psu.edu/lowe04distinctive.html" class="external text" title="http://citeseer.ist.psu.edu/lowe04distinctive.html" rel="nofollow">Distinctive Image Features from Scale-Invariant Keypoints</a>". <i>International Journal of Computer Vision</i> <b>60</b> (2): pp 91–110. <a href="http://en.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<span class="neverexpand"><a href="http://dx.doi.org/10.1023%2FB%3AVISI.0000029664.99615.94" class="external text" title="http://dx.doi.org/10.1023%2FB%3AVISI.0000029664.99615.94" rel="nofollow">10.1023/B:VISI.0000029664.99615.94</a></span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Distinctive+Image+Features+from+Scale-Invariant+Keypoints&amp;rft.jtitle=International+Journal+of+Computer+Vision&amp;rft.date=2004&amp;rft.volume=60&amp;rft.issue=2&amp;rft.au=D.+G.+Lowe&amp;rft.pages=pp+91%E2%80%93110&amp;rft_id=info:doi/10.1023%2FB%3AVISI.0000029664.99615.94&amp;rft_id=http%3A%2F%2Fciteseer.ist.psu.edu%2Flowe04distinctive.html"><span style="display: none;">&nbsp;</span></span></li>
+<li><cite style="font-style: normal;">J. Matas, O. Chum, M. Urban and T. Pajdla (2002). "<a href="http://cmp.felk.cvut.cz/%7Ematas/papers/matas-bmvc02.pdf" class="external text" title="http://cmp.felk.cvut.cz/~matas/papers/matas-bmvc02.pdf" rel="nofollow">Robust wide baseline stereo from maximally stable extremum regions</a>". <i>British Machine Vision Conference</i>: pp 384-393.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=proceeding&amp;rft.btitle=British+Machine+Vision+Conference&amp;rft.atitle=Robust+wide+baseline+stereo+from+maximally+stable+extremum+regions&amp;rft.au=J.+Matas%2C+O.+Chum%2C+M.+Urban+and+T.+Pajdla&amp;rft.date=2002&amp;rft.pages=pp+384-393&amp;rft_id=http%3A%2F%2Fcmp.felk.cvut.cz%2F%7Ematas%2Fpapers%2Fmatas-bmvc02.pdf"><span style="display: none;">&nbsp;</span></span></li>
+<li><cite style="font-style: normal;">K. Mikolajczyk, K. and C. Schmid (2004). "<a href="http://www.robots.ox.ac.uk/%7Evgg/research/affine/det_eval_files/mikolajczyk_ijcv2004.pdf" class="external text" title="http://www.robots.ox.ac.uk/~vgg/research/affine/det_eval_files/mikolajczyk_ijcv2004.pdf" rel="nofollow">Scale and affine invariant interest point detectors</a>". <i>International Journal of Computer Vision</i> <b>60</b> (1): pp 63–86. <a href="http://en.wikipedia.org/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<span class="neverexpand"><a href="http://dx.doi.org/10.1023%2FB%3AVISI.0000027790.02288.f2" class="external text" title="http://dx.doi.org/10.1023%2FB%3AVISI.0000027790.02288.f2" rel="nofollow">10.1023/B:VISI.0000027790.02288.f2</a></span>.</cite><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Scale+and+affine+invariant+interest+point+detectors&amp;rft.jtitle=International+Journal+of+Computer+Vision&amp;rft.date=2004&amp;rft.volume=60&amp;rft.issue=1&amp;rft.au=K.+Mikolajczyk%2C+K.+and+C.+Schmid&amp;rft.pages=pp+63%E2%80%9386&amp;rft_id=info:doi/10.1023%2FB%3AVISI.0000027790.02288.f2&amp;rft_id=http%3A%2F%2Fwww.robots.ox.ac.uk%2F%7Evgg%2Fresearch%2Faffine%2Fdet_eval_files%2Fmikolajczyk_ijcv2004.pdf"><span style="display: none;">&nbsp;</span></span></li>
+</ul>
+
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 2654/1000000
+Post-expand include size: 37041/2048000 bytes
+Template argument size: 10999/2048000 bytes
+Expensive parser function count: 0/500
+-->
+
+<!-- Saved in parser cache with key enwiki:pcache:idhash:6840205-0!1!0!default!!en!2 and timestamp 20081004182655 -->
+<div class="printfooter">
+Retrieved from "<a href="http://en.wikipedia.org/wiki/Blob_detection">http://en.wikipedia.org/wiki/Blob_detection</a>"</div>
+			<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="http://en.wikipedia.org/wiki/Special:Categories" title="Special:Categories">Categories</a>: <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:Computer_vision" title="Category:Computer vision">Computer vision</a></span> • <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:Image_processing" title="Category:Image processing">Image processing</a></span></div></div>			<!-- end content -->
+						<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+	
+				 <li id="ca-nstab-main" class="selected"><a href="http://en.wikipedia.org/wiki/Blob_detection" title="View the content page [alt-shift-c]" accesskey="c">Article</a></li>
+				 <li id="ca-talk"><a href="http://en.wikipedia.org/wiki/Talk:Blob_detection" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-edit"><a href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;action=edit" title="You can edit this page. 
+Please use the preview button before saving. [alt-shift-e]" accesskey="e">Edit this page</a></li>
+				 <li id="ca-history"><a href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;action=history" title="Past versions of this page [alt-shift-h]" accesskey="h">History</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="http://en.wikipedia.org/w/index.php?title=Special:UserLogin&amp;returnto=Blob_detection" title="You are encouraged to log in; however, it is not mandatory. [alt-shift-o]" accesskey="o">Log in / create account</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png);" href="http://en.wikipedia.org/wiki/Main_Page" title="Visit the main page [alt-shift-z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="generated-sidebar portlet" id="p-navigation">
+		<h5>Navigation</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-mainpage-description"><a href="http://en.wikipedia.org/wiki/Main_Page" title="Visit the main page [alt-shift-z]" accesskey="z">Main page</a></li>
+				<li id="n-contents"><a href="http://en.wikipedia.org/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li>
+				<li id="n-featuredcontent"><a href="http://en.wikipedia.org/wiki/Portal:Featured_content" title="Featured content — the best of Wikipedia">Featured content</a></li>
+				<li id="n-currentevents"><a href="http://en.wikipedia.org/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-randompage"><a href="http://en.wikipedia.org/wiki/Special:Random" title="Load a random article [alt-shift-x]" accesskey="x">Random article</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/wiki/Special:Search" id="searchform"><div>
+				<input autocomplete="off" id="searchInput" name="search" title="Search Wikipedia [alt-shift-f]" accesskey="f" value="" type="text">
+				<input name="go" class="searchButton" id="searchGoButton" value="Go" title="Go to a page with this exact name if one exists" type="submit">&nbsp;
+				<input name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search Wikipedia for this text" type="submit">
+			</div></form>
+		</div>
+	</div>
+	<div class="generated-sidebar portlet" id="p-interaction">
+		<h5>Interaction</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-aboutsite"><a href="http://en.wikipedia.org/wiki/Wikipedia:About" title="Find out about Wikipedia">About Wikipedia</a></li>
+				<li id="n-portal"><a href="http://en.wikipedia.org/wiki/Wikipedia:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-recentchanges"><a href="http://en.wikipedia.org/wiki/Special:RecentChanges" title="The list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+				<li id="n-contact"><a href="http://en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact Wikipedia</a></li>
+				<li id="n-sitesupport"><a href="http://wikimediafoundation.org/wiki/Donate" title="Support us">Donate to Wikipedia</a></li>
+				<li id="n-help"><a href="http://en.wikipedia.org/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="http://en.wikipedia.org/wiki/Special:WhatLinksHere/Blob_detection" title="List of all English Wikipedia pages containing links to this page [alt-shift-j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="http://en.wikipedia.org/wiki/Special:RecentChangesLinked/Blob_detection" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+<li id="t-upload"><a href="http://en.wikipedia.org/wiki/Wikipedia:Upload" title="Upload files [alt-shift-u]" accesskey="u">Upload file</a></li>
+<li id="t-specialpages"><a href="http://en.wikipedia.org/wiki/Special:SpecialPages" title="List of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;printable=yes" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="http://en.wikipedia.org/w/index.php?title=Blob_detection&amp;oldid=229101892" title="Permanent link to this version of the page">Permanent link</a></li><li id="t-cite"><a href="http://en.wikipedia.org/w/index.php?title=Special:Cite&amp;page=Blob_detection&amp;id=229101892">Cite this page</a></li>			</ul>
+		</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="Blob_detection_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki"></a></div>
+				<div id="f-copyrightico"><a href="http://wikimediafoundation.org/"><img src="Blob_detection_files/wikimedia-button.png" alt="Wikimedia Foundation" border="0"></a></div>
+			<ul id="f-list">
+				<li id="lastmod"> This page was last modified on 31 July 2008, at 21:39.</li>
+				<li id="copyright">All text is available under the terms of the <a class="internal" href="http://en.wikipedia.org/wiki/Wikipedia:Text_of_the_GNU_Free_Documentation_License" title="Wikipedia:Text of the GNU Free Documentation License">GNU Free Documentation License</a>. (See <b><a class="internal" href="http://en.wikipedia.org/wiki/Wikipedia:Copyrights" title="Wikipedia:Copyrights">Copyrights</a></b> for details.) <br> Wikipedia® is a registered trademark of the <a href="http://www.wikimediafoundation.org/">Wikimedia Foundation, Inc</a>., a U.S. registered <a class="internal" href="http://en.wikipedia.org/wiki/501%28c%29#501.28c.29.283.29" title="501(c)(3)">501(c)(3)</a> <a href="http://wikimediafoundation.org/wiki/Deductibility_of_donations">tax-deductible</a> <a class="internal" href="http://en.wikipedia.org/wiki/Non-profit_organization" title="Non-profit organization">nonprofit</a> <a href="http://en.wikipedia.org/wiki/Charitable_organization" title="Charitable organization">charity</a>.<br></li>
+				<li id="privacy"><a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy policy</a></li>
+				<li id="about"><a href="http://en.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+				<li id="disclaimer"><a href="http://en.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served by srv169 in 0.085 secs. --></body></html>
