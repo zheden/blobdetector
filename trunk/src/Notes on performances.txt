@@ -1,0 +1,30 @@
+
+
+
+NLFILT : 
+Non-maximum suppression...
+...on scale slices...
+-> Done in 30.7 seconds.
+...on height slices...
+-> Done in 124.1 seconds.
+...on width slices...
+-> Done in 154.3 seconds.
+
+TOTAL : 309.1
+
+
+COLFILT
+Non-maximum suppression...
+...on scale slices...
+-> Done in 96.2 seconds.
+...on height slices...
+-> Done in 6.5 seconds.
+...on width slices...
+-> Done in 6.8 seconds.
+
+TOTAL : 109.5
+
+
+WOXX FUNCTIONS
+Non-maximum suppression...
+-> Done in 81.0 seconds.
